@@ -25,11 +25,45 @@ Output: [[0,0,0]]
 Explanation: The only possible triplet sums up to 0.
 
 
-#Intuition: Classic 3Sum problem, brute firce
+#Intuition: Classic 3Sum problem, brute force approach is to take three nested loop O(n^3)
+Instead, lets sort the array and use 2 pointers, loop thru till u get num[i] > 0, since other elements will be greater
+then left = i+1, right = len-1, if sum[i] + sum[left] + sum[right] == 0, we found a valid triplet
+else if sum < 0, we need a larger number, so left++,
+else if sum > 0, we need a smaller number, so right--
+
 """
 
 def three_sum(nums: list[int]) -> list[list[int]]:
-    pass
+    results = []
+
+    nums.sort()
+
+    for i in range(len(nums)):
+        # other elements to the right will be greater, no way sum can be 0
+        if nums[i] > 0:
+            break
+
+        # same element we checked last time, can skip it safely
+        if i > 0 and nums[i-1] == nums[1]:
+            continue
+
+        left, right = i + 1, len(nums) -1
+        while left < right:
+            current_sum = nums[i] + nums[left] + nums[right]
+            if current_sum == 0:
+                results.append([nums[i], nums[left], nums[right]])
+
+                # Move pointers and skip duplicates
+                left += 1
+                right -= 1
+            elif current_sum < 0:
+                left += 1 # Need a larger value
+            else:
+                right -= 1 # Need a smaller value
+
+    return results
+
+
 
 if __name__ == "__main__":
     assert three_sum([-1,0,1,2,-1,-4]) == [[-1,-1,2],[-1,0,1]]
