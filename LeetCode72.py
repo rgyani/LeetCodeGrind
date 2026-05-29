@@ -55,7 +55,6 @@ if we had hor and r, the cost is conversion of ho to blank
 if we get matching characters, we just copy dp[i-1][j-1], ie the cost of prefixes before these characters
 if we dont, we find the minimum cost among dp[i-1][j-1], dp[i-1][j] and dp[i][j-1] and add 1 to it
 """
-from math import inf
 
 
 def min_distance(word1: str, word2: str) -> int:
