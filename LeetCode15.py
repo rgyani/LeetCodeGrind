@@ -44,7 +44,7 @@ def three_sum(nums: list[int]) -> list[list[int]]:
             break
 
         # same element we checked last time, can skip it safely
-        if i > 0 and nums[i-1] == nums[1]:
+        if i > 0 and nums[i-1] == nums[i]:
             continue
 
         left, right = i + 1, len(nums) -1
@@ -56,6 +56,12 @@ def three_sum(nums: list[int]) -> list[list[int]]:
                 # Move pointers and skip duplicates
                 left += 1
                 right -= 1
+
+                # but the elements might repeat, so keep moving if u get similar elements
+                while left < right and nums[left] == nums[left - 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right + 1]:
+                    right -= 1
             elif current_sum < 0:
                 left += 1 # Need a larger value
             else:
@@ -63,9 +69,8 @@ def three_sum(nums: list[int]) -> list[list[int]]:
 
     return results
 
-
-
 if __name__ == "__main__":
     assert three_sum([-1,0,1,2,-1,-4]) == [[-1,-1,2],[-1,0,1]]
     assert three_sum([0,1,1]) == []
     assert three_sum([0,0,0]) == [[0,0,0]]
+    assert three_sum([1,2,0,1,0,0,0,0]) == [[0,0,0]]

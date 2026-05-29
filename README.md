@@ -4,7 +4,7 @@
 Leet Code Problems
 
 1. Sliding Window: 3, 76, 209, 424, 567, 904
-2. Two Pointers: 11, 15, 16, 18, 42, 167
+2. Two Pointers: 11, 15, 16, 18, 42*, 167
 3. Fast/Slow Pointers (Linked List): 141, 142, 19, 876, 160, 234
 4. Binary Search on Sorted Data: 33, 34, 35, 153, 162, 704
 5. Binary Search on Answer: 875, 1011, 410, 774, 1283, 1482

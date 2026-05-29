@@ -20,11 +20,16 @@ Then we REVERSE scan the list again and store the highest wall to the right
 So that means we store two arrays for left_max and right_max
 
 This is perfectly valid O(n) solution, but needs storing two extra arrays.
-We can do better with a two pointer approach,
 
+We can do better with a two pointer approach,
 where we keep left and right pointers to the highest walls we have seen
 Now if we had highest_left < highest_right, we cannot store anything above highest_left since no matter the current wall height, everything will spill over on the left side
-Similarly on the right side, and now we can squeeze the two pointers till they meet in the middle
+Similarly on the right side,
+and now we can squeeze the two pointers till they meet in the middle
+
+more intuitively, say at left =0, right = len-1, we have walls 1, and 2
+so even if there is a wall to the right of current position, we wont be able to store anything more than height of left wall
+so we dont need to find the highest wall to the right of current pos, it's water cap is determined by left_max wall and current pos
 """
 
 

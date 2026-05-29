@@ -26,36 +26,42 @@ if sum < target, we need a larger number, so left++
 """
 
 
-def four_sums(nums:list[int], target:int)-> list[list[int]]:
+def four_sums(nums: list[int], target: int) -> list[list[int]]:
     nums.sort()
     result = []
-    n=len(nums)
+    n = len(nums)
 
-    for i in range(n-1):
+    for i in range(n - 1):
         # skip duplicate for the first element
-        if i > 0 and nums[i] == nums[i-1]:
+        if i > 0 and nums[i] == nums[i - 1]:
             continue
 
         # here we can already optimize if sum(i,i+1, i+2, i+3) > target, we skip this i
         # and also, if sum(i, n-3, n-2, n-1) < target, we skip this i
 
-        for j in range(i+1, n-2):
+        for j in range(i + 1, n - 2):
             # skip duplicate for the second element
-            if j > i+1 and nums[j] == nums[j - 1]:
+            if j > i + 1 and nums[j] == nums[j - 1]:
                 continue
 
             # same optimization above can be applied here
 
             # two pointer approach for the remaining elements
 
-            left, right = j+1, n -1
+            left, right = j + 1, n - 1
             while left < right:
                 current_sum = nums[i] + nums[j] + nums[left] + nums[right]
 
                 if current_sum == target:
-                    result.append([nums[i],nums[j],nums[left],nums[right]])
-                    left +=1
-                    right -=1
+                    result.append([nums[i], nums[j], nums[left], nums[right]])
+                    left += 1
+                    right -= 1
+
+                    # but the elements might repeat, so keep moving if u get similar elements
+                    while left < right and nums[left] == nums[left - 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right + 1]:
+                        right -= 1
                 elif current_sum < target:
                     left += 1
                 else:
@@ -63,6 +69,8 @@ def four_sums(nums:list[int], target:int)-> list[list[int]]:
 
     return result
 
+
 if __name__ == "__main__":
-    assert four_sums(nums = [1,0,-1,0,-2,2], target = 0) == [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
-    assert four_sums(nums = [2,2,2,2,2], target = 8) == [[2,2,2,2]]
+    assert four_sums(nums=[1, 0, -1, 0, -2, 2], target=0) == [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]
+    assert four_sums(nums=[2, 2, 2, 2, 2], target=8) == [[2, 2, 2, 2]]
+    assert four_sums(nums=[-2, -1, -1, 1, 1, 2, 2], target=0) == [[-2, -1, 1, 2], [-1, -1, 1, 1]]

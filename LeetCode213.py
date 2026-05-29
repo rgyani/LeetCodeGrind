@@ -26,8 +26,8 @@ Output: 3
 So Instead we split the list into two parts, 0 to n-1 and 1 to n
 """
 
-def rob(nums: list[int])-> int:
-    # 'n_minus_2' represents dp[i-2], 'n_minus_1' represents dp[i-1]
+def rob_subset(nums: list[int])-> int:
+    # n_minus_2 represents dp[i-2], n_minus_1 represents dp[i-1]
     n_minus_2 = 0
     n_minus_1 = 0
 
@@ -41,15 +41,15 @@ def rob(nums: list[int])-> int:
 
     return n_minus_1
 
-def rob_circular(nums:list[int])->int:
+def rob(nums:list[int])->int:
     if not nums:
         return 0
     if len(nums) == 1:
         return nums[0]
 
-    return max(rob(nums[:-1]), rob(nums[1:]))
+    return max(rob_subset(nums[:-1]), rob_subset(nums[1:]))
 
 if __name__ == "__main__":
-    assert rob_circular([2,3,2]) == 3
-    assert rob_circular([1,2,3,1]) == 4
-    assert rob_circular([1,2,3]) == 3
+    assert rob([2,3,2]) == 3
+    assert rob([1,2,3,1]) == 4
+    assert rob([1,2,3]) == 3
