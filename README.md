@@ -4,7 +4,7 @@
 Leet Code Problems
 
 1. Sliding Window: 3, 76, 209, 424, 567, 904
-2. Two Pointers: 11, 15, 16, 18, 42*, 167
+2. Two Pointers: 11, 15, 16, 18, 167, 42*
 3. Fast/Slow Pointers (Linked List): 141, 142, 19, 876, 160, 234
 4. Binary Search on Sorted Data: 33, 34, 35, 153, 162, 704
 5. Binary Search on Answer: 875, 1011, 410, 774, 1283, 1482
@@ -32,5 +32,6 @@ Leet Code Problems
 27. 1D DP Basics: 70, 198, 213, 322, 279, 300
 28. Knapsack / Subset DP: 416, 494, 518, 474, 1049, 879
 29. Grid DP: 62, 63, 64, 221, 931, 120, 964
-30. String DP / Sequence DP: 1143, 72, 115, 583, 97, 1312
-31. String+HashTable: 1048, 
+30. String DP / Sequence DP: 1143, 72, 115, 583, 97, 1312*
+31. String+HashTable: 1048*, 
+32: HARD: 765, 964, 968, 956
