@@ -19,7 +19,7 @@ return the max of possible palindromes
 
 This is brute force approach
 1. Can not be improved with DP apprach
-1. Can be improved with Manacher's algo
+1. Can be improved with Manacher's algo https://www.youtube.com/watch?v=V-sEwsca1ak
 """
 
 

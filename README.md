@@ -31,5 +31,6 @@ Leet Code Problems
 26. Bit Manipulation: 136, 137, 191, 338, 268, 190
 27. 1D DP Basics: 70, 198, 213, 322, 279, 300
 28. Knapsack / Subset DP: 416, 494, 518, 474, 1049, 879
-29. Grid DP: 62, 63, 64, 221, 931, 120
+29. Grid DP: 62, 63, 64, 221, 931, 120, 964
 30. String DP / Sequence DP: 1143, 72, 115, 583, 97, 1312
+31. String+HashTable: 1048, 
