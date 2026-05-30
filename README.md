@@ -34,4 +34,4 @@ Leet Code Problems
 29. Grid DP: 62, 63, 64, 221, 931, 120, 964
 30. String DP / Sequence DP: 1143, 72, 115, 583, 97, 1312*
 31. String+HashTable: 1048*, 
-32: HARD: 765, 964, 968, 956
+32: HARD: 312, 765, 952, 956,  968, 972, 

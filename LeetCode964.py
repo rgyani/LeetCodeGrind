@@ -35,62 +35,76 @@ Output: 3
 Explanation: 100 * 100 * 100 * 100.
 The expression contains 3 operations.
 
-Intuition: say if we had x=10, target = 19, with base 10, we would have compared minops( 2 * 10^1 - 1*10^0, 1 * 10^1 + 9 * 10^0)
-but now we have x=3 so 19base3 is
-19/3 = 6 with remainder 1
-6/3  = 2 with remainder 0
-2/3 =  0 with remainder 2
-the 19base3 hence is 201
+Intuition:
+we are trying to reach a destination (the target) by taking steps.
+our only allowed step sizes are powers of x.
+If x = 3, our allowed step sizes are:
+    * 1 (which we write as 3 / 3)
+    * 3 (which we write as 3)
+    * 9 (which we write as 3 * 3)
+    * 27 (which we write as 3 * 3 * 3)
+Every time we choose a step size, we pay a "cost" in operators.
+Larger steps actually cost more operators to type out because they require more multiplications.
 
-so we compare 2 * 3^2 + 0 * 3^1 + 1 * 3^0 with
+At any given moment, we look at our target and find the closest giant step size that fits into it.
+We always have exactly two choices:
+    The Floor (Under-shooting): we tae the largest steps we can without going over, and then figure out how to cover the small remaining distance.
+    The Ceiling (Over-shooting): take one extra large step to go past the target, and then figure out how to step backward to correct it.
 
+eg x = 3, target = 19
+The closest power of 3 near 19 is 9 (3 * 3). 19 = 9 + 9 + 1
+    Choice 1: The Floor (Stop at 18) We take two steps of 3 * 3 + 3 * 3, then add the remaining target which is 1 = 3/3 -> Total ops = 5
+    Chouce 2: The Ceiling (Overshoot to 27) Instead of stopping at two 9s, we take three 9s: 3*3+ 3*3 + 3*3 and subtract 8. To get 8 we need 1 + whatever ops 8 requires, but we already are at 6 ops,
 
-501base5 was 4001, so we have minops(4 * 5^3 + 0 * 5^2 + 0 * 5^1 + 1 * 5^0, 1 * 5^4 - 1 * 5^3 + 1 * 5^0)
+So we can either do it via DP or just making the choice 1 or choice 2 based on info so far using a graph to represent the hightest power seen so far and finding the short path from target to 0
+so
+19 = 6 X 3 + 1  we solve for both 6 and 1 now, knowing we need one more operation to join them
+19  = 7 * 3 - 2, we solve for both 7 and 2 now, knowing we need one more operation to join them
 
-so there is no intution, we just need to understand this and then simple compare
 """
 
-def least_ops_express_target(x:int, target:int) -> int:
-    memo = {}
 
-    def dfs(target: int) -> int:
-        # Base case: if target is less than x, we evaluate it directly
-        if target < x:
-            # e.g., if x=3, target=2: we can do '3/3 + 3/3' (4 ops)
-            # or '3 - 3/3' (2 ops). We choose the minimum.
-            return min(2 * target - 1, 2 * (x - target))
+def least_ops_express_target(x: int, target: int) -> int:
+    remainder = target % x
 
-        if target in memo:
-            return memo[target]
+    # floor: cost to make remainder units
+    floor = remainder * 2
+    # ceil: cost to overshoot to the next multiple of x
+    ceil = (x - remainder) * 2
 
-        # Find the power of x just below or equal to target
-        product = x
-        times = 1
-        while product * x <= target:
-            product *= x
-            times += 1
+    # Move to power = 1 (the x place, e.g., 3)
+    target //= x
+    power = 1
 
-        # exact match
-        if product == target:
-            return times - 1
+    while target > 0:
+        remainder = target % x
 
-        # Option 1: Keep the current chunk and recurse on the remainder
-        # Example: 11 // 9 = 1 chunk of 9, remainder 2
-        # Cost is (times * count) + cost of remainder
-        count = target // product
-        rem1 = target - product * count
-        ans = count * times + dfs(rem1)
+        # A block at the current power costs exactly 'power' operations.
+        # Example: if power=1 (3s place), a 3 costs 1 op (the connecting sign)
+        # If power=2 (9s place), a 3*3 costs 2 ops (1 multiplication + 1 connecting sign)
 
-        # Option 2: Round up to the next multiple and subtract the difference
-        # Example: Round up to 2 chunks of 9 (18), remainder 7
-        rem2 = product * (count + 1) - target
-        if rem2 < target:  # Avoid infinite loops
-            ans = min(ans, (count + 1) * times + dfs(rem2))
+        # To find the new floor:
+        # 1. Stayed on floor path: add 'remainder' blocks of current power
+        # 2. Came from ceil path: we overshot last time, so we have 1 extra block.
+        #    We only need remainder + 1 blocks.
+        next_floor = min(remainder * power + floor, (remainder + 1) * power + ceil)
 
-        memo[target] = ans
-        return ans
+        # To find the new ceil:
+        # 1. Coming from floor path: we need x - remainder blocks to overshoot
+        # 2. Coming from ceil path: we already have 1 extra block, so we only need x - remainder - 1 blocks
+        next_ceil = min((x - remainder) * power + floor, (x - remainder - 1) * power + ceil)
 
-    return dfs(target)
+        floor = next_floor
+        ceil = next_ceil
+
+        target //= x
+        power += 1
+
+    # Finally, the result is the minimum of:
+    # 1. The floor path
+    # 2. The ceil path + the cost of the final carried-over power block
+    # We subtract 1 because the very first term doesn't need a leading '+' or '-' sign.
+    return min(floor, ceil + power) - 1
 
 if __name__ == "__main__":
     assert least_ops_express_target(x=3, target=19) == 5
@@ -99,5 +113,6 @@ if __name__ == "__main__":
     assert least_ops_express_target(x=3, target=1) == 1
     assert least_ops_express_target(x=3, target=2) == 2
     assert least_ops_express_target(x=3, target=3) == 0
+    print("All tests passed successfully!")
 
 
