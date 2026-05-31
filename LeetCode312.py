@@ -8,39 +8,76 @@ Return the maximum coins you can collect by bursting the balloons wisely.
 
 
 Example 1:
-
 Input: nums = [3,1,5,8]
 Output: 167
 Explanation:
 nums = [3,1,5,8] --> [3,5,8] --> [3,8] --> [8] --> []
 coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167
-Example 2:
 
+Example 2:
 Input: nums = [1,5]
 Output: 10
+
+
+Intution: build a DP array to find out the max value
+where dp[i][j] means the baloons between i and j are burst
+For dp[i][j], we tries every balloon k between i and j as the last one burst. The formula is:
+nums[i] * nums[k] * nums[j]   ← coins for bursting k last
++ dp[i][k]                    ← best coins left of k
++ dp[k][j]                    ← best coins right of k
+
+  1  3  1  5  8  1
+  0  1  2  3  4  5           <- j
+0       3                    <- baloons between 0 and 2 is burst-
+1          15                <- baloons between 1 and 3 is burst
+2              40
+3                 40
+4
+5
+
+for gap 2
+    dp[0][2] : last balloon burst between indices 0 and 2:
+        k=1 (nums[1]=3)	1×3×1 + dp[0][1] + dp[1][2]	 = 3
+
+    dp[1][3] : last balloon burst between indices 1 and 3:
+        k=2 (nums[2]=1)	3×1×5 + dp[1][2] + dp[2][3]	 = 15
+
+    dp[2][4] : last balloon burst between indices 2 and 4:
+        k=3 (nums[3]=5)	1×5×8 + dp[2][3] + dp[3][4]	 = 40
+
+now gap is 3,
+    dp[0][3] : last balloon burst between indices 0 and 3:
+        k=1 (nums[1]=3)	1×3×5 + dp[0][1] + dp[1][3]	= 30
+        k=2 (nums[2]=1)	1×1×5 + dp[0][2] + dp[2][3]	 = 8
+
+    dp[1][4] : last balloon burst between indices 1 and 4:
+        k=2 (nums[2]=1)	3×1×8 + dp[1][2] + dp[2][4]	= 64
+        k=3 (nums[3]=5)	3×5×8 + dp[1][3] + dp[3][4]	= 135
+
+    dp[2][5] : last balloon burst between indices 2 and 5:
+        k=3 (nums[3]=5)	1×5×1 + dp[2][3] + dp[3][5]	= 45
+        k=4 (nums[4]=8)	1×8×1 + dp[2][4] + dp[4][5]	= 48
+
 """
 
 
 def max_coins(nums: list[int]) -> int:
+    nums = [1] + nums + [1]
     n = len(nums)
+    dp = [[0] * n for _ in range(n)]
 
-    # Pad the array with 1 at both ends
-    a = [1] + nums + [1]
+    # iterate over all window sizes (gap between left and right)
+    for gap in range(2, n):  # gap=2 means one balloon between
+        for left in range(n - gap):
+            right = left + gap
+            for k in range(left + 1, right):  # k is last burst
+                coins = nums[left] * nums[k] * nums[right]
+                dp[left][right] = max(
+                    dp[left][right],
+                    coins + dp[left][k] + dp[k][right]
+                )
 
-    # Initialize the DP table with zeros
-    # Size is (n + 2) x (n + 2)
-    dp = [[0] * (n + 2) for _ in range(n + 2)]
-
-    # Matrix Chain Multiplication (MCM) style DP
-    for length in range(n):
-        for i in range(1, n - length + 1):
-            j = i + length
-            for k in range(i, j + 1):
-                # dp[i][k-1] + dp[k+1][j] + coin gained from bursting balloon k last
-                coins = dp[i][k - 1] + dp[k + 1][j] + a[k] * a[i - 1] * a[j + 1]
-                dp[i][j] = max(dp[i][j], coins)
-
-    return dp[1][n]
+    return dp[0][n - 1]
 
 if __name__ == "__main__":
     assert max_coins([3,1,5,8]) == 167

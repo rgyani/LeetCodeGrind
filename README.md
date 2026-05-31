@@ -33,5 +33,5 @@ Leet Code Problems
 28. Knapsack / Subset DP: 416, 494, 518, 474, 1049, 879
 29. Grid DP: 62, 63, 64, 221, 931, 120, 964
 30. String DP / Sequence DP: 1143, 72, 115, 583, 97, 1312*
-31. String+HashTable: 1048*, 
-32: HARD: 312, 765, 952, 956,  968, 972, 
+31. MED: 1048*, 
+32. HARD: 312, 765, 952, 956,  968, 972, 

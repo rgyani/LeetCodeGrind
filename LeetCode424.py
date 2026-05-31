@@ -28,7 +28,7 @@ else, we note the max_window_size and continue expanding the window to the right
 
 
 def character_replacement(s: str, k: int) -> int:
-    if not s or k == 0:
+    if not s:
         return 0
 
     # within the window, we count the frequency of each character
@@ -58,3 +58,4 @@ if __name__ == "__main__":
     assert character_replacement("ABAB", 2) == 4
     assert character_replacement("AABABBA", 1) == 4
     assert character_replacement("AABBBCCCCCC", 2) == 8
+    assert character_replacement("AAAA", 0) == 4
