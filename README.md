@@ -9,7 +9,7 @@ Leet Code Problems
 4. Binary Search on Sorted Data: 33, 34, 35, 153, 162, 704
 5. Binary Search on Answer: 875, 1011, 410, 774, 1283, 1482
 6. Hashing / Frequency Maps: 1, 49, 128, 217, 242, 347
-7. Prefix Sum / Running Sum: 303, 560, 724, 930, 974, 523
+7. Prefix Sum / Running Sum: 303, 560*, 724, 930, 974, 523
 8. Difference Array / Range Updates: 370, 1094, 1109, 1893, 1943, 2381
 9. Monotonic Stack: 739, 496, 503, 84, 85, 901
 10. Monotonic Queue / Deque: 239, 862, 1425, 1438, 1499, 1696
