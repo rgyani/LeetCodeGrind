@@ -7,11 +7,12 @@ Return the maximum amount of water a container can store.
 
 Notice that you may not slant the container.
 
+Example 1:
 Input: height = [1,8,6,2,5,4,8,3,7]
 Output: 49
 Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
-Example 2:
 
+Example 2:
 Input: height = [1,1]
 Output: 1
 
@@ -20,6 +21,10 @@ Intuition: Use 2 pointers, left =0 and right = len(height) -1
 Calculate max_water = right-left * min(height[left], height[right])
 now if height[left] < height[right] -> move left + 1, else move right -1
 keep doing this till left < right
+
+Why
+1. cause, at any position, the max water it can contain is the min of left and right containers
+2. why move left when height[left]<height[right], cause water always flows off from the lower height, so we need to find a height to the left which will stop the water
 """
 from typing import List
 

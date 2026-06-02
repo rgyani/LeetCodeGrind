@@ -13,8 +13,8 @@ Example 1:
 Input: nums = [-1,2,1,-4], target = 1
 Output: 2
 Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
-Example 2:
 
+Example 2:
 Input: nums = [0,0,0], target = 1
 Output: 0
 Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
@@ -22,8 +22,10 @@ Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
 
 Intuition:
 using 3 loops is gonna be O(n^3)
+
 Instead, we sort the array, fix i, then left = i+1, right = len-1
 and now we track the closest_sum at each step and return that
+
 if closest_sum == target, we return immediately
 else if current_sum < target, we need a bigger number, so left++
 else if current_sum > target, we need a smaller number, so right--

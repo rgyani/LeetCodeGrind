@@ -30,8 +30,8 @@ def is_palindrome(input: int) -> bool:
 
     x = input
     y = 0
-    # just reverse the number by continously doing a moduly of 10 and compare the result
 
+    # just reverse the number by continously doing a moduly of 10 and compare the result
     while x != 0:
         y = y * 10 + x % 10
         x //= 10
