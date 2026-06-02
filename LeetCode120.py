@@ -53,7 +53,7 @@ def minimum_total(triangle: list[list[int]]) -> int:
             # j+1 in our 1-indexed DP array maps to index j in the triangle
             dp[j + 1] = lst[j] + min(dp[j], dp[j + 1])
 
-    return min(dp)
+    return int(min(dp))
 
 if __name__== "__main__":
     assert minimum_total([[-1],[3,2],[-3,1,-1]]) == -1

@@ -37,7 +37,7 @@ def character_replacement(s: str, k: int) -> int:
     max_freq = 0
     left = 0
 
-    for right,ch in enumerate(s):
+    for right, ch in enumerate(s):
         # we note the count of each character
         count[ch] = count.get(ch, 0) + 1
 
@@ -53,6 +53,7 @@ def character_replacement(s: str, k: int) -> int:
         result = max(result, right - left + 1)
 
     return result
+
 
 if __name__ == "__main__":
     assert character_replacement("ABAB", 2) == 4

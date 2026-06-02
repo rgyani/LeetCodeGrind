@@ -28,6 +28,12 @@ we can find which one has least amount of coins
 so using DP approach, we can maintain an array where each element contains the minimum coins needed to reach this
 so dp[0] = 0, dp[1] = 1, dp[2] = min(dp[1] + 1, 1), dp[3] = min(dp[2] + 1, dp[0] + 1), dp[4] = min(dp[2] + 1, dp[3] + 1), dp[5] = min(1, dp[3] + 2, dp[4]+1) and so on
 do dp[n] = min(dp[n-1] + 1, dp[n-2] + 1, dp[n-5] + 1)
+
+
+   0  1  2  3  4  5  6  7  8  9  10  11
+1  0  1  2  3  4  5  6  7  8  9  10  11
+2  0  1  1  2  2  3  3  4  4  5  5   6
+5  0  1  1  1  1  1  2  2  3  3  2   3
 """
 from math import inf
 
@@ -36,16 +42,17 @@ def coin_change(coins:list[int], amount:int)-> int:
     if amount == 0:
         return 0
 
-    dp = [0]
+    # dp[i] will be storing the minimum number of coins required for amount i
+    # amount + 1 is a placeholder for infinity
+    dp = [amount + 1] * (amount + 1)
+    dp[0] = 0
 
     for i in range(1, amount + 1):
-        min_coins = inf
         for coin in coins:
-            if i - coin >= 0 and dp[i-coin] != -1:
-                min_coins = min(min_coins, dp[i-coin] + 1)
-        dp.append(-1 if min_coins == inf else int(min_coins))
+            if i - coin >= 0:
+                dp[i] = min(dp[i], 1 + dp[i - coin])
 
-    return dp[-1]
+    return dp[amount] if dp[amount] != amount + 1 else -1
 
 if __name__ == "__main__":
     assert coin_change([1,2,5], 11) == 3

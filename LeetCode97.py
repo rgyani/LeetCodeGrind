@@ -54,35 +54,35 @@ c F  F  T  T  T  T
 c F  F  F  T  F  T
 """
 
-def interleave_possible(s1:str, s2:str, s3:str) -> bool:
-    m,n = len(s1), len(s2)
 
-    if m+n != len(s3):
+def interleave_possible(s1: str, s2: str, s3: str) -> bool:
+    m, n = len(s1), len(s2)
+
+    if m + n != len(s3):
         return False
 
-    dp = [[False] * (n+1) for _ in range(m+1)]
+    dp = [[False] * (n + 1) for _ in range(m + 1)]
 
     dp[0][0] = True
 
     # fill the first row when s2 is empty
     for i in range(1, m + 1):
-        dp[i][0] = dp[i-1][0] and s1[i - 1] == s3[i - 1]
+        dp[i][0] = dp[i - 1][0] and s1[i - 1] == s3[i - 1]
 
     # fill the first column when s1 is empty
-    for j in range(1, n+1):
-        dp[0][j] = dp[0][j-1] and s2[j-1] == s3[j-1]
+    for j in range(1, n + 1):
+        dp[0][j] = dp[0][j - 1] and s2[j - 1] == s3[j - 1]
 
-
-
-    for i in range(1, m+1):
-        for j in range(1, n+1):
-            top = dp[i-1][j] and s1[i-1] == s3[i+j-1]
-            left = dp[i][j-1] and s2[j-1] == s3[i+j-1]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            top = dp[i - 1][j] and s1[i - 1] == s3[i + j - 1]
+            left = dp[i][j - 1] and s2[j - 1] == s3[i + j - 1]
             dp[i][j] = top or left
 
     return dp[m][n]
 
+
 if __name__ == "__main__":
     assert interleave_possible(s1="aabcc", s2="dbbca", s3="aadbbcbcac") == True
-    assert interleave_possible(s1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc") == False
+    assert interleave_possible(s1="aabcc", s2="dbbca", s3="aadbbbaccc") == False
     assert interleave_possible("", "", "") == True

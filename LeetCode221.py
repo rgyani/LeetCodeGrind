@@ -15,15 +15,12 @@ Input: matrix = [["0"]]
 Output: 0
 
 
-Intution: dp[i][j] == "1" it is a square of length atleast 1, but
+Intution: dp[i][j] == "1" if it is a square of length atleast 1, but
 if dp[i-1][j] is a square of length >1 and also dp[i][j-1] is a square of length > 1 dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1
 if dp[i-1][j] is a square of length >1 and also dp[i][j-1] is a square of length > 1 and dp[i-1][j-1] == 1, then dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1
 """
-from math import sqrt
-from typing import List
 
-
-def maximal_square(matrix: List[List[str]]) -> int:
+def maximal_square(matrix: list[list[str]]) -> int:
     if not matrix or not matrix[0]:
         return 0
 

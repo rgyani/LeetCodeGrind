@@ -4,7 +4,6 @@ Given an integer array nums where every element appears three times except for o
 You must implement a solution with a linear runtime complexity and use only constant extra space.
 
 
-
 Example 1:
 Input: nums = [2,2,3,2]
 Output: 3
@@ -16,7 +15,7 @@ Output: 99
 Intuition:
 If duplicates appear... Your mental model is...       The tool you use is...
 2 times (Even)          Flip-flop switch (2 states)   XOR (^)
-K times                 Rotary dial (K states)      Bitwise Column Sum % K
+K times                 Rotary dial (K states)        Bitwise Column Sum % K
 3 times (Odd/Generic)   Rotary dial (3 states)        Bitwise Column Sum % 3
 
 2 -> 010

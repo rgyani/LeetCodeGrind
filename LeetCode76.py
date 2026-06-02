@@ -4,17 +4,16 @@ such that every character in t (including duplicates) is included in the window.
 If there is no such substring, return the empty string "".
 
 Example 1:
-
 Input: s = "ADOBECODEBANC", t = "ABC"
 Output: "BANC"
 Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
-Example 2:
 
+Example 2:
 Input: s = "a", t = "a"
 Output: "a"
 Explanation: The entire string s is the minimum window.
-Example 3:
 
+Example 3:
 Input: s = "a", t = "aa"
 Output: ""
 Explanation: Both 'a's from t must be included in the window.

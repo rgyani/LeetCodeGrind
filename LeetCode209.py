@@ -36,8 +36,8 @@ def min_sub_array_len(target: int, nums: List[int]) -> int:
 
     length = inf
     # iterate thru the array, adding item to the sum
-    for right, i in enumerate(nums):
-        sum += i
+    for right, val in enumerate(nums):
+        sum += val
 
         # as soon as we hit the target, we start removing elements from the left
         while sum >= target:

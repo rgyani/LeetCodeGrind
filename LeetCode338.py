@@ -20,7 +20,8 @@ Explanation:
 4 --> 100
 5 --> 101
 
-Intution: we can loop from 0 to n inclusive and calculate hamming weight of each number
+Intution: Read LeetCode191.py
+we can loop from 0 to n inclusive and calculate hamming weight of each number
 but remember bits in i are just bits in i//2 moved to the left, plus 1 if i is odd
 """
 

@@ -24,13 +24,40 @@ Output: 0
 Explanation: The billboard cannot be supported, so we return 0.
 
 
-Intution: add all rods, get sum //2 = height we want to build
+Intution:
+each rod can be placed in one of three states—left support, right support, or left out entirely—
+a brute-force approach would take O(n^3) time, which is too slow for larger sets.
 
-then DP from 0 to Height, each rod can either be used or not used
+d = left_height - right_height
 
-    1   2  3  4   5   6
-1   0   1  2  3   4   5
-2   0   1  3  2   2   3
-3   2  -2  0  -1  1   0
-6   4
 """
+
+
+def tallestBillboard(rods: list[int]) -> int:
+    # dp[diff] = max height of the shorter support with that difference
+    dp = {0: 0}
+
+    for r in rods:
+        # We must copy the current DP state so updates from this rod
+        # don't interfere with other choices for the same rod
+        current_dp = dp.copy()
+
+        for d, h in current_dp.items():
+            # Choice 1: Put rod on the taller side
+            # New difference increases by r, short side height stays 'h'
+            dp[d + r] = max(dp.get(d + r, 0), h)
+
+            # Choice 2: Put rod on the shorter side
+            # New difference is the absolute difference, short side grows by min(d, r)
+            new_d = abs(d - r)
+            new_h = h + min(d, r)
+            dp[new_d] = max(dp.get(new_d, 0), new_h)
+
+    # The answer is the max height of the shorter side when the difference is 0
+    return dp.get(0, 0)
+
+if __name__ == "__main__":
+    assert tallestBillboard([1,2,3,6]) == 6
+    assert tallestBillboard([1, 2]) == 0
+    assert tallestBillboard([1, 2, 3, 4, 5, 6]) == 10
+

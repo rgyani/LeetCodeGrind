@@ -27,7 +27,7 @@ Consider mbadm
  We look at the two ends, i = 0, j= 4, s[i] == s[j], we now compare s[i+1] and s[j+1]
 now these dont match, so how do i make them happy. either insert s[j] on the left or insert s[i] on the right
 
-so bad becomes either
+so 'bad' becomes either
 1. dbad      d we added, so now we solve ba, ie s[i..j-1] which is dp[i][j-1]
 2. or badb   b we added, so now we solve ad, ie s[i+1...j] which is dp[i+1][j]
 so dp[i][j] = 1 + min(dp[i+1][j], dp[i][j-1])
