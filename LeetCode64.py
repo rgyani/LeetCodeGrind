@@ -31,7 +31,7 @@ def min_path_sum(grid: List[List[int]]) -> int:
         for j, val in enumerate(lst):
             dp[i+1][j+1] = val + min(dp[i][j+1], dp[i+1][j])
 
-    return dp[m][n]
+    return int(dp[m][n])
 
 if __name__ == "__main__":
     assert min_path_sum([[100, 100, 100, 100]]) == 400

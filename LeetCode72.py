@@ -27,7 +27,7 @@ exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 
 
-Intution:
+Intuition:
 
 X = blank
 

@@ -21,7 +21,7 @@ Explanation: There are three ways to climb to the top.
 2. 1 step + 2 steps
 3. 2 steps + 1 step
 
-Intution: for each step we could be on the n-1 step or n-2 step, so this is classic DP problem
+Intuition: for each step we could be on the n-1 step or n-2 step, so this is classic DP problem
 number of ways to reach current step = number of ways to reach current-1 step + number of ways to reach current-2 step
 
 now if current step = 1, there is only 1 way to reach it. climbing 1 step
