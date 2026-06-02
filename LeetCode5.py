@@ -18,7 +18,7 @@ keep noting the palindrome size at each step
 return the max of possible palindromes
 
 This is brute force approach
-1. Can not be improved with DP apprach
+1. Can be improved with DP apprach
 1. Can be improved with Manacher's algo https://www.youtube.com/watch?v=V-sEwsca1ak
 """
 
@@ -27,7 +27,7 @@ def longest_palindrome(s: str) -> str:
     if not s:
         return ""
 
-    ## keep it simple stupid expand left and right along each index, find largest palindrone and return
+    ## keep it simple stupid expand left and right along each index, find largest palindrome and return
 
     def expand(left:int, right:int) -> tuple[int, int]:
         while left >= 0 and right < len(s) and s[left] == s[right]:
