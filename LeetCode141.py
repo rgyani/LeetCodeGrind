@@ -27,12 +27,8 @@ U loop till fast.next is available, cause if the linkedlist does not have a loop
 """
 from typing import Optional
 
+from LinkedList import ListNode, build_linked_list_with_cycle
 
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
@@ -52,44 +48,22 @@ class Solution:
         return False
 
 
-def create_linked_list_with_cycle(arr: list[int], pos: int) -> Optional[ListNode]:
-    if not arr:
-        return None
 
-    # Create the head node
-    head = ListNode(arr[0])
-    current = head
-
-    # Keep track of nodes to easily hook up the cycle later
-    node_list = [head]
-
-    # Build the rest of the list
-    for val in arr[1:]:
-        new_node = ListNode(val)
-        current.next = new_node
-        current = new_node
-        node_list.append(new_node)
-
-    # If pos is valid, connect the last node to the node at index 'pos'
-    if pos != -1 and pos < len(node_list):
-        current.next = node_list[pos]
-
-    return head
 
 if __name__ == "__main__":
     solution = Solution()
 
     nums1 = [3, 2, 0, -4]
     pos1 = 1
-    head1 = create_linked_list_with_cycle(nums1, pos1)
+    head1 = build_linked_list_with_cycle(nums1, pos1)
     assert solution.hasCycle(head1) == True
 
     nums2 = [1, 2]
     pos2 = 0
-    head2 = create_linked_list_with_cycle(nums2, pos2)
+    head2 = build_linked_list_with_cycle(nums2, pos2)
     assert solution.hasCycle(head2) == True
 
     nums3 = [1]
     pos3 = -1
-    head3 = create_linked_list_with_cycle(nums3, pos3)
+    head3 = build_linked_list_with_cycle(nums3, pos3)
     assert solution.hasCycle(head3) == False

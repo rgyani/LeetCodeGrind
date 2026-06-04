@@ -23,11 +23,8 @@ so
 """
 from typing import Optional
 
+from LinkedList import ListNode, build_linked_list
 
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
 
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
@@ -74,15 +71,7 @@ class Solution:
         return is_pal
 
 
-def build_linked_list(arr: list) -> Optional[ListNode]:
-    if not arr:
-        return None
-    head = ListNode(arr[0])
-    current = head
-    for val in arr[1:]:
-        current.next = ListNode(val)
-        current = current.next
-    return head
+
 
 
 if __name__ == "__main__":

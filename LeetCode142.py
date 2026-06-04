@@ -33,7 +33,7 @@ exactly equal to the distance from the meeting point to the start of the cycle
 """
 from typing import Optional
 
-from LeetCode141 import ListNode, create_linked_list_with_cycle
+from LinkedList import ListNode, build_linked_list_with_cycle
 
 
 class Solution:
@@ -66,20 +66,21 @@ class Solution:
                 iter = iter.next
 
         return None
+
 if __name__ == "__main__":
     solution = Solution()
 
     nums1 = [3, 2, 0, -4]
     pos1 = 1
-    head1 = create_linked_list_with_cycle(nums1, pos1)
+    head1 = build_linked_list_with_cycle(nums1, pos1)
     assert solution.detectCycle(head1).val == 2
 
     nums2 = [1, 2]
     pos2 = 0
-    head2 = create_linked_list_with_cycle(nums2, pos2)
+    head2 = build_linked_list_with_cycle(nums2, pos2)
     assert solution.detectCycle(head2).val == 1
 
     nums3 = [1]
     pos3 = -1
-    head3 = create_linked_list_with_cycle(nums3, pos3)
+    head3 = build_linked_list_with_cycle(nums3, pos3)
     assert solution.detectCycle(head3) == None
