@@ -85,11 +85,9 @@ def build_linked_list(arr: list) -> Optional[ListNode]:
     return head
 
 
-# Test Runner
 if __name__ == "__main__":
     solution = Solution()
 
-    # Define your test cases as standard Python lists
     test_cases = [
         {"input": [1, 2, 2, 1], "expected": True},
         {"input": [1, 2], "expected": False},
@@ -101,9 +99,6 @@ if __name__ == "__main__":
     for i, case in enumerate(test_cases):
         # Convert the array to a linked list
         head_node = build_linked_list(case["input"])
-
-        # Run your algorithm
         result = solution.isPalindrome(head_node)
-
         # Check correctness
         assert result == case["expected"]
