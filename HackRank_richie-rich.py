@@ -2,41 +2,39 @@
 https://www.hackerrank.com/challenges/richie-rich/problem
 Palindromes are strings that read the same from the left or right, for example madam or 0110.
 
-You will be given a string representation of a number and a maximum number of changes you can make. Alter the string, one digit at a time, to create the string representation of the largest number possible given the limit to the number of changes. The length of the string may not be altered, so you must consider 's left of all higher digits in your tests. For example  is valid,  is not.
+You will be given a string representation of a number and a maximum number of changes you can make.
+Alter the string, one digit at a time, to create the string representation of the largest number possible given the limit to the number of changes. The length of the string may not be altered, so you must consider 's left of all higher digits in your tests. For example  is valid,  is not.
 
 Given a string representing the starting number, and a maximum number of changes allowed, create the largest palindromic string of digits possible or the string '-1' if it is not possible to create a palindrome under the contstraints.
 
-Example
+Example 1
+
+s=1231
+k=2
+make 3 replacements to get 9339
+
+s=12321
+s=1
+make 1 replacement to get 12921
+
+s=3943
+s=1
+make 1 replacement to get 3993
 
 
-Make  replacements to get .
+Intution:
+The challenge here is to get palindrome, but u need to get the highest value
+so for 1231 if the available cost is 1, u shud return 1331
+       1231 if the available cost is 2, u shud return 1991
+       1231 if the available cost is 4, u shud return 9999
 
+We use 2 pointers to first count how many replacements are needed
+eg in the above case it will be F,T,F,F,
+now we make the replacements, again using 2 pointers, if flag[i] or flag[j] is True, make replacement both 9 if cost >=2, else higher of s[i], s[j] if cost == 1, if not cost remains return -1
+if there is still some cost remaining, and >=2, start changing from the ends till cost >1
 
-
-Make  replacement to get .
-
-Function Description
-
-Complete the highestValuePalindrome function in the editor below.
-
-highestValuePalindrome has the following parameter(s):
-
-string s: a string representation of an integer
-int n: the length of the integer string
-int k: the maximum number of changes allowed
-Returns
-
-string: a string representation of the highest value achievable or -1
-Input Format
-
-The first line contains two space-separated integers,  and , the number of digits in the number and the maximum number of changes allowed.
-The second line contains an -digit string of numbers.
-
-Constraints
-
-Each character  in the number is an integer where .
 """
-def do_tenent(s: str, k: int, n: int):
+def highestValuePalindrome(s: str, k: int, n: int):
     chars = list(s)
 
     # Track which indices were modified in the first pass
