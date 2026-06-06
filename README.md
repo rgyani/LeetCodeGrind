@@ -4,7 +4,7 @@
 Leet Code Problems
 
 1. Sliding Window: 3, 76, 209, 424, 567, 904
-2. Two Pointers: 11, 15, 16, 18, 167, 42*, 125, 680
+2. Two Pointers: 11, 15, 16, 18, 167, 42*, 125, 443, 680
 3. Fast/Slow Pointers (Linked List): 141, 142, 19, 876, 160
 4. Binary Search on Sorted Data: 33, 34, 35, 153, 162, 704
 5. Binary Search on Answer: 875, 1011, 410, 774, 1283, 1482
@@ -16,7 +16,7 @@ Leet Code Problems
 11. Heap / Top K: 215, 347, 692, 703, 973, 1046
 12. Intervals: 56, 57, 252, 253, 435, 452
 13. Greedy Scheduling / Sorting: 45, 55, 406, 621, 763, 134
-14. Linked List Manipulation: 21, 23, 24, 25, 92, 138, 234
+14. Linked List Manipulation: 21, 23, 24, 25, 92, 138, 206, 234
 15. Tree DFS: 104, 112, 113, 543, 124, 226
 16. Tree BFS / Level Order: 102, 103, 199, 515, 637, 116
 17. BST Problems: 98, 99, 230, 235, 450, 700
@@ -35,3 +35,4 @@ Leet Code Problems
 30. String DP / Sequence DP: 1143, 72, 115, 583, 97, 1312*
 31. MED: 1048*, 
 32. HARD: 312*, 765, 952, 956,  968, 972, 
+33. Set: 994, 
